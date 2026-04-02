@@ -1,0 +1,92 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: users
+    // Document ID: {userId} (matches request.auth.uid)
+    // Fields:
+    //   - uid: string (required, immutable) - User's unique ID
+    //   - age: number (required) - User's age (1-100)
+    //   - language: string (required) - Preferred language code
+    //   - viewedServices: list (optional) - Array of service IDs
+    //   - bookmarkedServices: list (optional) - Array of service IDs
+    //
+    // ===============================================================
+
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+    
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() &&
+        (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin' ||
+          (request.auth.token.email == "krishprajapati2147@gmail.com" && request.auth.token.email_verified == true));
+    }
+
+    function hasRequiredFields(fields) {
+      return request.resource.data.keys().hasAll(fields);
+    }
+
+    function hasOnlyAllowedFields(fields) {
+      return request.resource.data.keys().hasOnly(fields);
+    }
+
+    function isValidAge(age) {
+      return age is number && age >= 1 && age <= 100;
+    }
+
+    function isValidLanguage(lang) {
+      return lang is string && lang.size() <= 5;
+    }
+
+    function isValidList(list, maxSize) {
+      return list is list && list.size() <= maxSize;
+    }
+
+    // Domain Validator
+    function isValidUserProfile(data) {
+      return hasOnlyAllowedFields(['uid', 'age', 'language', 'viewedServices', 'bookmarkedServices', 'role']) &&
+             data.uid == request.auth.uid &&
+             isValidAge(data.age) &&
+             isValidLanguage(data.language) &&
+             (!('viewedServices' in data) || isValidList(data.viewedServices, 50)) &&
+             (!('bookmarkedServices' in data) || isValidList(data.bookmarkedServices, 50));
+    }
+
+    // ===============================================================
+    // Rules
+    // ===============================================================
+
+    match /users/{userId} {
+      // Only the owner can read their own profile (contains PII like age/preferences)
+      allow read: if isOwner(userId) || isAdmin();
+      
+      // Only the owner can create their profile, and they can't set themselves as admin
+      allow create: if isOwner(userId) && 
+                      isValidUserProfile(request.resource.data) &&
+                      (!('role' in request.resource.data) || request.resource.data.role == 'user');
+      
+      // Only the owner can update their profile, and they can't change their role or UID
+      allow update: if isOwner(userId) && 
+                      isValidUserProfile(request.resource.data) &&
+                      request.resource.data.uid == resource.data.uid &&
+                      (!('role' in request.resource.data) || request.resource.data.role == resource.data.role);
+    }
+
+    match /test/connection {
+      allow read: if true;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Stores user preferences and progress.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Unique user ID from Firebase Auth" },
+        "age": { "type": "number", "description": "User's age" },
+        "language": { "type": "string", "description": "Preferred language code" },
+        "viewedServices": { "type": "array", "items": { "type": "string" }, "description": "List of service IDs viewed" },
+        "bookmarkedServices": { "type": "array", "items": { "type": "string" }, "description": "List of service IDs bookmarked" }
+      },
+      "required": ["uid", "age", "language"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile document"
+    }
+  }
+}
