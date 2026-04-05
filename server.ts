@@ -5,7 +5,7 @@ import { createServer as createViteServer } from "vite";
 import path from "path";
 import { fileURLToPath } from "url";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import e from "express";
+
 
 dotenv.config();
 
@@ -16,7 +16,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = Number(process.env.PORT) || 3000;
 
   // Middleware
   app.use(cors());
@@ -75,8 +75,8 @@ User question: ${message}
   }
 
   app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-    console.log(`Chat endpoint available at http://localhost:${PORT}/chat`);
+    console.log(`Server running on port ${PORT}`);
+    console.log(`Chat endpoint available at ${PORT}/chat`);
   });
 }
 
