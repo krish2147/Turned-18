@@ -855,8 +855,8 @@ export const SERVICES: Service[] = [
   {
     id: 'pan-card',
     icon: '💳',
-    applyLink: 'https://www.onlineservices.nsdl.com/paam/endUserRegisterContact.html',
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ', // Placeholder demo video
+    applyLink: 'https://eportal.incometax.gov.in/iec/foservices/#/pre-login/instant-e-pan',
+    videoUrl: 'https://youtu.be/L0K9bWrJXf0?si=X2na-9xuitMjxHzu', // Placeholder demo video
     translations: fillMissing(panCardTranslations),
   },
   {
