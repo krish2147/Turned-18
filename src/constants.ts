@@ -824,6 +824,19 @@ const panCardTranslations: Record<Language, ServiceTranslation> = {
     ],
   },
   am: {
+     title: 'PAN Card',
+    description: 'Permanent Account Number for financial transactions.',
+    overview: 'The PAN card is a unique 10-digit alphanumeric identifier issued by the Income Tax Department.',
+    whyNeeded: 'Essential for opening bank accounts, receiving taxable salary, and professional transactions.',
+    eligibility: 'Any Indian citizen aged 18 or above.',
+    documents: ['Aadhar Card', 'Proof of Date of Birth', 'Recent Photographs'],
+    process: [
+      'Visit the NSDL or UTIITSL website.',
+      'Fill out Form 49A.',
+      'Upload required documents.',
+      'Pay the processing fee.',
+      'Receive PAN card via post.'
+    ],
   },
 };
 
