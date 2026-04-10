@@ -1,4 +1,4 @@
-export type Language = 'en' | 'hi' | 'gu' | 'ta' | 'te' | 'kn' | 'ml' | 'bn' | 'mr' | 'pa' | 'ur';
+export type Language = 'en' | 'hi' | 'gu' | 'ta' | 'te' | 'kn' | 'ml' | 'bn' | 'mr' | 'pa' | 'ur' | 'am';
 
 export interface Translation {
   common: {

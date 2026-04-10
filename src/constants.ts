@@ -12,6 +12,7 @@ export const LANGUAGES: { code: Language; name: string; font: string }[] = [
   { code: 'mr', name: 'मराठी (Marathi)', font: 'font-sans' },
   { code: 'pa', name: 'ਪੰਜਾਬੀ (Punjabi)', font: 'font-sans' },
   { code: 'ur', name: 'اردو (Urdu)', font: 'font-sans' },
+  { code: 'am', name:'অসমীয়া (assamese)', font:'font-sans'}
 ];
 
 const en: Translation = {
@@ -602,6 +603,59 @@ landing: {
   },
 };
 
+const am: Translation = {
+  common: {
+    back: 'ফিৰে যাওক',
+    next: 'পৰৱর্তী',
+    getStarted: 'আৰম্ভ কৰক',
+    selectLanguage: 'আপোনাৰ ভাষা নিৰ্বাচন কৰক',
+    enterAge: 'আপোনাৰ বয়স লিখক',
+    submit: 'জমা দিয়ক',
+    search: 'সেৱাসমূহ বিচাৰক...',
+    loading: 'লোড হৈছে...',
+  },
+  age: {
+    notEligible: 'অহ, আপুনি এতিয়াও 18 বছৰ হোৱা নাই!',
+    eligibleIn: 'আপোনাৰ এতিয়াও',
+    years: 'বছৰ বাকী আছে 18 হোৱাৰ বাবে',
+    waiting: '18 হোৱাৰ পাছত পুনৰ আহক। আমি আপোনাৰ অপেক্ষা কৰিছো!',
+    prepTips: 'প্ৰস্তুতি টিপস:',
+    invalidAge: 'অনুগ্ৰহ কৰি সঠিক বয়স লিখক (1-100)',
+    tip1: 'আপোনাৰ আধাৰ কাৰ্ড বৰ্তমান ঠিকনাৰ সৈতে আপডেট ৰাখক।',
+    tip2: 'নিশ্চিত কৰক যে আপোনাৰ মোবাইল নম্বৰ আধাৰৰ সৈতে সংযুক্ত আছে।',
+    tip3: 'আর্থিক সাক্ষরতা আৰু মৌলিক ব্যাংকিং সম্পর্কে জানক।',
+    tip4: 'বাসস্থানের প্রমাণের ডকুমেন্ট সংগ্রহ করা শুরু করুন।',
+  },
+  landing: {
+    title: 'Turned 18,',
+    rotatingText: [
+      'now what can you apply for?',
+      'what are you eligible for?',
+      'where do you start?',
+    ],
+  },
+  dashboard: {
+    title: 'আপুনি কি বাবে আবেদন কৰিব বিচাৰে?',
+    subtitle: 'তৰুণসকলৰ বাবে প্ৰয়োজনীয় চৰকাৰী সেৱাসমূহ সন্ধান কৰক।',
+    noResults: "আপোনাৰ অনুসন্ধানৰ সৈতে মিল থকা কোনো সেৱা পোৱা নগ'ল।",
+  },
+  service: {
+    overview: 'সংক্ষিপ্ত বিবৰণ',
+    whyNeeded: 'কিয় প্ৰয়োজন',
+    eligibility: 'যোগ্যতা',
+    documents: 'প্ৰয়োজনীয় নথিপত্ৰ',
+    process: 'ধাপ-ধাপে প্ৰক্ৰিয়া',
+    applyNow: 'অফিচিয়েল আবেদন লিংক',
+  },
+  chat: {
+    title: 'Saathi',
+    greeting: 'হাই 👋 আমি সাথী - আপনার AI সহকারী।',
+    serverDown: 'দুঃখিত, সার্ভার ডাউন আছে\nআমি আপনাকে শীঘ্রই গাইড করব,\nততক্ষণে আপনি নিচের রিসোর্সগুলি দেখতে পারেন 👇',
+    placeholder: 'কিছু জিজ্ঞাসা করুন...',
+    typing: 'AI টাইপ করছে...',
+  },
+}
+
 
 const panCardTranslations: Record<Language, ServiceTranslation> = {
   en: {
@@ -768,6 +822,8 @@ const panCardTranslations: Record<Language, ServiceTranslation> = {
       'پروسیسنگ فیس ادا کریں۔',
       'پوسٹ کے ذریعے پین کارڈ وصول کریں۔'
     ],
+  },
+  am: {
   },
 };
 
@@ -1703,4 +1759,5 @@ export const translations: Record<Language, Translation> = {
   mr,
   pa,
   ur,
+  am,
 };
